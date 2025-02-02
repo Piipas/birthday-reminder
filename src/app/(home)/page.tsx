@@ -37,6 +37,15 @@ export default async function Home() {
                 <BirthdayList />
               </CardContent>
             </Card>
+            <AuthButton
+              action="signout"
+              className="absolute top-4 right-4"
+              size={"icon"}
+              variant={"ghost"}
+              title="Logout"
+            >
+              <LogOut className="!w-6 !h-6" />
+            </AuthButton>
           </div>
         ) : (
           <div className="w-full flex justify-center pt-4 gap-4">
@@ -49,9 +58,6 @@ export default async function Home() {
           </div>
         )}
       </div>
-      <AuthButton action="signout" className="absolute top-4 right-4" size={"icon"} variant={"ghost"} title="Logout">
-        <LogOut className="!w-6 !h-6" />
-      </AuthButton>
     </div>
   );
 }

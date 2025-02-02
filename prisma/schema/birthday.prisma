@@ -1,0 +1,11 @@
+model Birthday {
+  id      String   @id @default(uuid())
+  name    String
+  date    DateTime
+  user_id String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  User User @relation(fields: [user_id], references: [id])
+}

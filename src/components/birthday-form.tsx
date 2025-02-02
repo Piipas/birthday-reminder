@@ -8,19 +8,25 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { NewBirthday } from "@/lib/schemas/new-birthday";
 import { Calendar } from "./ui/calendar";
+import newBirthdayAction from "@/lib/actions/new-birthday";
+import { useServerAction } from "zsa-react";
 
 const BirthdayForm = () => {
+  const { isPending, execute } = useServerAction(newBirthdayAction);
+
   const form = useForm<z.infer<typeof NewBirthday>>({
     resolver: zodResolver(NewBirthday),
     defaultValues: {
       name: "",
+      date: undefined,
     },
   });
 
-  function onSubmit(values: z.infer<typeof NewBirthday>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof NewBirthday>) {
+    console.log(typeof values);
+    const [, error] = await execute(values);
+    if (error) console.error("client error:", error);
+    form.reset();
   }
 
   return (
@@ -33,7 +39,7 @@ const BirthdayForm = () => {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder="Pipas" {...field} />
+                <Input placeholder="Pipas" className="py-6 text-lg" {...field} />
               </FormControl>
               <FormDescription hidden></FormDescription>
               <FormMessage />
@@ -72,8 +78,8 @@ const BirthdayForm = () => {
             </FormItem>
           )}
         />
-        <Button className="w-full" type="submit" size={"lg"}>
-          Add Birthday
+        <Button className="w-full" type="submit" size={"lg"} disabled={isPending}>
+          {isPending ? "Adding Birthday..." : "Add Birthday"}
         </Button>
       </form>
     </Form>

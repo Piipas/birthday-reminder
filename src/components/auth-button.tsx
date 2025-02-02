@@ -1,21 +1,16 @@
 "use client";
 
 import { authClient } from "@/config/auth-client";
-import { Button } from "./ui/button";
+import { Button, ButtonProps } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
-const AuthButton = ({
-  provider,
-  action,
-  children,
-  className,
-}: {
+interface AuthButtonProps extends ButtonProps {
   provider?: "github" | "google";
   action: "auth" | "signout";
-  children: React.ReactNode | React.ReactNode[];
-  className?: string;
-}) => {
+}
+
+const AuthButton = ({ provider, action, children, className, ...props }: AuthButtonProps) => {
   const router = useRouter();
   const handleOAuth2 = async () => {
     if (provider) await authClient.signIn.social({ provider });
@@ -34,8 +29,9 @@ const AuthButton = ({
   return (
     <Button
       onClick={action === "auth" ? handleOAuth2 : handleLogout}
-      className={cn("text-lg py-6", className)}
+      className={cn("", className)}
       size={"lg"}
+      {...props}
     >
       {children}
     </Button>

@@ -1,8 +1,9 @@
 import AuthButton from "@/components/auth-button";
 import BirthdayForm from "@/components/birthday-form";
+import BirthdayList from "@/components/birthday-list";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { auth } from "@/config/auth";
-import { Gift, Github } from "lucide-react";
+import { Cake, Gift, Github } from "lucide-react";
 import { headers } from "next/headers";
 
 export default async function Home() {
@@ -23,6 +24,16 @@ export default async function Home() {
               </CardHeader>
               <CardContent>
                 <BirthdayForm />
+              </CardContent>
+            </Card>
+            <Card className="w-1/2">
+              <CardHeader>
+                <CardTitle className="flex gap-4 capitalize items-center">
+                  <Cake size={30} /> Upcoming birthdays
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <BirthdayList />
               </CardContent>
             </Card>
           </div>

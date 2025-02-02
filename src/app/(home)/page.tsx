@@ -23,7 +23,7 @@ export default async function Home() {
                   <Gift size={30} /> Add new Birthday
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="flex-1 max-h-[calc(100%-78px)] overflow-auto">
                 <BirthdayForm />
               </CardContent>
             </Card>

@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Birthday Reminder",
-  description: "A web app that remind with close people birthdays by emails.",
+  description: "A web app that sends email reminders for the birthdays of your close ones.",
 };
 
 export default function RootLayout({

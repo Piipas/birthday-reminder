@@ -5,6 +5,7 @@ import nextBirthdayDate from "@/lib/utils/next-birthday-date";
 import { db } from "@/config/prisma";
 import DeleteButton from "./delete-button";
 import { CalendarDays } from "lucide-react";
+import sortByClosestBirthday from "@/lib/utils/sort-by-closes-birthday";
 
 const BirthdayList = async () => {
   const birthdayList = await db.birthday.findMany();
@@ -12,7 +13,7 @@ const BirthdayList = async () => {
   return (
     <div className="space-y-3">
       {birthdayList.length ? (
-        birthdayList.map((birthday) => {
+        sortByClosestBirthday(birthdayList).map((birthday) => {
           const birthdayDate = new Date(birthday.date);
           return (
             <div className="group rounded-lg px-4 py-6 bg-gray-100 shadow-md flex gap-2" key={birthday.id}>

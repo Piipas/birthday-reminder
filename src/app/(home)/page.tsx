@@ -1,6 +1,7 @@
 import AuthButton from "@/components/auth-button";
 import BirthdayForm from "@/components/birthday-form";
 import BirthdayList from "@/components/birthday-list";
+import Google from "@/components/icons/google";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { auth } from "@/config/auth";
 import { Cake, Gift, Github, LogOut } from "lucide-react";
@@ -12,7 +13,7 @@ export default async function Home() {
   return (
     <div className="flex items-center justify-center h-screen w-full">
       <div className="space-y-4 w-full">
-        <div className="text-6xl font-extrabold text-center">Birthday Reminder</div>
+        <div className="text-6xl font-extrabold text-center pt-8">Birthday Reminder</div>
         <div className="text-2xl text-gray-700 text-center">Never miss a special day again!</div>
         {session?.user ? (
           <div className="flex gap-4 container w-full max-w-[1000px] pt-8">
@@ -38,9 +39,12 @@ export default async function Home() {
             </Card>
           </div>
         ) : (
-          <div className="w-full flex justify-center pt-4">
-            <AuthButton provider="github" action="auth" className="mx-auto text-lg py-6">
+          <div className="w-full flex justify-center pt-4 gap-4">
+            <AuthButton provider="github" action="auth" className="text-lg py-6">
               <Github className="!size-6" /> Continue With Github
+            </AuthButton>
+            <AuthButton provider="google" action="auth" className="text-lg py-6 text-primary" variant={"secondary"}>
+              <Google className="!size-6" /> Continue With Google
             </AuthButton>
           </div>
         )}

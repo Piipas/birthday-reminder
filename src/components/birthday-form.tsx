@@ -37,7 +37,7 @@ const BirthdayForm = () => {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel className="text-lg">Name</FormLabel>
               <FormControl>
                 <Input placeholder="Pipas" className="py-6 text-lg" {...field} />
               </FormControl>
@@ -52,7 +52,7 @@ const BirthdayForm = () => {
           name="date"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Date</FormLabel>
+              <FormLabel className="text-lg">Date</FormLabel>
               <FormControl>
                 <Calendar
                   mode="single"
@@ -63,7 +63,7 @@ const BirthdayForm = () => {
                   captionLayout="dropdown-buttons"
                   fromYear={1950}
                   toDate={new Date()}
-                  className="h-full w-full flex text-3xl"
+                  className="h-full w-full flex text-3xl border border-input rounded-md bg-white"
                   classNames={{
                     months: "flex w-full flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0 flex-1",
                     month: "space-y-4 w-full flex flex-col",

@@ -4,6 +4,7 @@ import BirthdayList from "@/components/birthday-list";
 import Google from "@/components/icons/google";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { auth } from "@/config/auth";
+import { cn } from "@/lib/utils";
 import { Cake, Gift, Github, LogOut } from "lucide-react";
 import { headers } from "next/headers";
 
@@ -11,7 +12,7 @@ export default async function Home() {
   const session = await auth.api.getSession({ headers: await headers() });
 
   return (
-    <div className="flex md:items-center justify-center h-screen w-full">
+    <div className={cn("flex justify-center h-screen w-full", session?.user || "items-center")}>
       <div className="space-y-4 w-full">
         <div className="text-6xl font-extrabold text-center pt-16 md:pt-8">Birthday Reminder</div>
         <div className="text-2xl text-gray-700 text-center">Never miss a special day again!</div>
@@ -48,7 +49,7 @@ export default async function Home() {
             </AuthButton>
           </div>
         ) : (
-          <div className="w-full flex justify-center pt-4 gap-4">
+          <div className="w-full flex justify-center items-center pt-4 gap-4 max-md:flex-wrap">
             <AuthButton provider="github" action="auth" className="text-lg py-6">
               <Github className="!size-6" /> Continue With Github
             </AuthButton>

@@ -11,13 +11,13 @@ export default async function Home() {
   const session = await auth.api.getSession({ headers: await headers() });
 
   return (
-    <div className="flex items-center justify-center h-screen w-full">
+    <div className="flex md:items-center justify-center h-screen w-full">
       <div className="space-y-4 w-full">
-        <div className="text-6xl font-extrabold text-center pt-8">Birthday Reminder</div>
+        <div className="text-6xl font-extrabold text-center pt-16 md:pt-8">Birthday Reminder</div>
         <div className="text-2xl text-gray-700 text-center">Never miss a special day again!</div>
         {session?.user ? (
-          <div className="flex gap-4 container w-full max-w-[1000px] pt-8">
-            <Card className="w-1/2 bg-white/80 h-[600px] rounded-l-3xl">
+          <div className="flex gap-4 container w-full max-w-[1000px] pt-8 max-md:flex-wrap">
+            <Card className="w-full md:w-1/2 bg-white/80 h-[600px] rounded-t-3xl md:rounded-l-3xl">
               <CardHeader>
                 <CardTitle className="flex gap-4 capitalize items-center">
                   <Gift size={30} /> Add new Birthday
@@ -27,7 +27,7 @@ export default async function Home() {
                 <BirthdayForm />
               </CardContent>
             </Card>
-            <Card className="bg-white/80 flex flex-col rounded-r-3xl overflow-hidden max-h-[600px] w-1/2">
+            <Card className="bg-white/80 flex flex-col rounded-b-3xl md:rounded-r-3xl overflow-hidden max-h-[600px] w-full md:w-1/2 max-md:mb-8">
               <CardHeader>
                 <CardTitle className="flex gap-4 capitalize items-center">
                   <Cake size={30} /> Upcoming birthdays

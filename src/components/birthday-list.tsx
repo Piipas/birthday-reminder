@@ -6,9 +6,12 @@ import { db } from "@/config/prisma";
 import DeleteButton from "./delete-button";
 import { CalendarDays } from "lucide-react";
 import sortByClosestBirthday from "@/lib/utils/sort-by-closes-birthday";
+import { auth } from "@/config/auth";
+import { headers } from "next/headers";
 
 const BirthdayList = async () => {
-  const birthdayList = await db.birthday.findMany();
+  const session = await auth.api.getSession({ headers: await headers() });
+  const birthdayList = await db.birthday.findMany({ where: { user_id: session?.user.id } });
 
   return (
     <div className="space-y-3">

@@ -19,14 +19,16 @@ export async function GET(request: Request) {
         AND EXTRACT(DAY FROM b.date) = ${today.getDate()}
     `;
 
-    todayBirthdays.forEach((birthday) => {
-      transporter.sendMail({
-        html: `Hi ${birthday.name}, today is ${birthday.personname}'s birthday. Don't forget to wish him/her a great birthday!`,
-        to: birthday.email,
-        sender: "Birthday Reminder",
-        subject: `${birthday.personname}'s birthday!`,
-      });
-    });
+    await Promise.all(
+      todayBirthdays.map(async (birthday) => {
+        await transporter.sendMail({
+          html: `Hi ${birthday.name}, today is ${birthday.personname}'s birthday. Don't forget to wish him/her a great birthday!`,
+          to: birthday.email,
+          sender: "Birthday Reminder",
+          subject: `${birthday.personname}'s birthday!`,
+        });
+      }),
+    );
 
     return NextResponse.json({ data: "Emails sent." }, { status: 200 });
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

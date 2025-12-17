@@ -23,11 +23,7 @@ const BirthdayForm = () => {
   });
 
   async function onSubmit(values: z.infer<typeof NewBirthday>) {
-    console.log(values);
-    const [, error] = await execute({
-      name: values.name,
-      date: new Date(values.date).toISOString().split("T")[0],
-    });
+    const [, error] = await execute(values);
     if (error) console.error("client error:", error);
     form.reset();
   }
@@ -59,7 +55,7 @@ const BirthdayForm = () => {
               <FormControl>
                 <Calendar
                   mode="single"
-                  selected={new Date(field.value)}
+                  selected={field.value}
                   onSelect={field.onChange}
                   disabled={(date) => date > new Date() || date < new Date("1900-01-01")}
                   initialFocus

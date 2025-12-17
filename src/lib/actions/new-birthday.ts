@@ -18,19 +18,18 @@ const newBirthdayAction = createServerAction()
         return;
       }
 
-      const createdBirthday = await db.birthday.create({
+      await db.birthday.create({
         data: {
           name: input.name,
-          date: new Date(input.date.toISOString()),
+          date: new Date(input.date),
           User: {
             connect: { id: session.user.id },
           },
         },
       });
-      console.log(createdBirthday);
       revalidatePath("/");
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   });
 

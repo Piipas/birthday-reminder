@@ -1,7 +1,7 @@
 model Birthday {
   id      String   @id @default(uuid())
   name    String
-  date    DateTime
+  date    DateTime @db.Date
   user_id String
 
   created_at DateTime @default(now())

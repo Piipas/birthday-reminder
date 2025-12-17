@@ -23,7 +23,7 @@ const BirthdayForm = () => {
   });
 
   async function onSubmit(values: z.infer<typeof NewBirthday>) {
-    const [, error] = await execute(values);
+    const [, error] = await execute({ name: values.name, date: new Date(values.date.setHours(12)) });
     if (error) console.error("client error:", error);
     form.reset();
   }

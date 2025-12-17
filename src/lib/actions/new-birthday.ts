@@ -21,7 +21,7 @@ const newBirthdayAction = createServerAction()
       await db.birthday.create({
         data: {
           name: input.name,
-          date: new Date(input.date.setHours(12)),
+          date: input.date,
           User: {
             connect: { id: session.user.id },
           },
